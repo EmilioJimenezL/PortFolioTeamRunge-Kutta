@@ -17,11 +17,11 @@ Construct the quadratic Lagrange interpolating polynomial for the following data
 (1,2), (3,4), (4,3)
 """
 
-def f_lagrange(x):
+def f_lagrange1(x):
     return -(2/3)*x**2 + (11/3)*x - 1
 
 x = np.linspace(0,5,500)
-y = f_lagrange(x)
+y = f_lagrange1(x)
 
 plt.plot(x,y, label = "y = lagrange polynomial", color = "blue")
 
@@ -36,3 +36,9 @@ plt.title("Lagrange polynomial")
 plt.legend()
 plt.grid()
 plt.show()
+
+"""
+Excercise 2:
+Find the polynomial of degree 2 that interpolates at the points:
+(0,1), (1,2), (4,2)
+"""

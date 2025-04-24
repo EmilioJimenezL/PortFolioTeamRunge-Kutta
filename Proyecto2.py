@@ -1,8 +1,7 @@
-
-
 #paquetes usados
 import numpy as np
 import matplotlib.pyplot as plt
+import sympy as sp
 
 #metodo simpson
 def simpson(f, a, b, n):
@@ -153,3 +152,15 @@ def Lagrange(x0,increment):
     dydx_num = forward(f, x0, increment)
     
     plot_resultsLabels(x0, f, dydx_exact, dydx_num)
+
+def lagrange_interpolation(x_vals, y_vals):
+    x = sp.Symbol('x')
+    n = len(x_vals)
+    p = 0
+    for i in range(n):
+        L_i = 1
+        for j in range(n):
+            if i != j:
+                L_i *= (x - x_vals[j]) / (x_vals[i] - x_vals[j])
+        p += y_vals[i] * L_i
+    return sp.simplify(p)
