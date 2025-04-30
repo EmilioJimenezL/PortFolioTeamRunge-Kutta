@@ -87,6 +87,24 @@ def application_trapezoidal_simple():
 
 
 #Polinomios lagrange
+
+def forward(f, x0, increment): # FORWARD EULER
+    dydx_num = (f(x0+increment)-f(x0))/increment
+    return dydx_num
+
+def backward(f, x0, decrement):  # BACKWARD EULER
+    dydx_num = (f(x0 + decrement) - f(x0)) / decrement
+    return dydx_num
+
+def central(f, x0, h):  # CENTRAL
+    dydx_num = (f(x0 + h) - f(x0 - h)) / (2 * h)
+    return dydx_num
+
+def exact(Df, x0):
+    # Exact/Analytical Solution
+    dydx_exact = Df(x0)
+    return dydx_exact
+
 def Lagrange(x0,increment):
     x1 = x0 + increment
     x = np.array([x0, x1])
