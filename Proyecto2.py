@@ -182,3 +182,38 @@ def lagrange_interpolation(x_vals, y_vals):
                 L_i *= (x - x_vals[j]) / (x_vals[i] - x_vals[j])
         p += y_vals[i] * L_i
     return sp.simplify(p)
+
+def riemann_sum(f, a, b, n, method='midpoint'):
+    """
+    Calculate the Riemann sum for a function f over interval [a,b] with n subdivisions.
+    
+    Parameters:
+        f (function): The function to integrate
+        a (float): Lower bound of the interval
+        b (float): Upper bound of the interval
+        n (int): Number of subdivisions
+        method (str): Type of Riemann sum - 'left', 'right', or 'midpoint'
+    
+    Returns:
+        float: Approximate value of the definite integral
+    """
+    if n <= 0:
+        raise ValueError("Number of subdivisions must be positive")
+    
+    dx = (b - a) / n  # Width of each subinterval
+    x = np.linspace(a, b, n+1)  # Partition points
+    
+    if method == 'left':
+        # Left Riemann sum - use left endpoint of each subinterval
+        points = x[:-1]
+    elif method == 'right':
+        # Right Riemann sum - use right endpoint of each subinterval
+        points = x[1:]
+    elif method == 'midpoint':
+        # Midpoint Riemann sum - use midpoint of each subinterval
+        points = (x[:-1] + x[1:]) / 2
+    else:
+        raise ValueError("Method must be 'left', 'right', or 'midpoint'")
+    
+    # Calculate sum of function values multiplied by dx
+    return dx * sum(f(points))
